@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig = require('swig');
-
+var dotenv =require("dotenv");
+dotenv.load();
 
 // *** routes *** //
 var routes = require('./routes/index.js');
@@ -37,12 +38,12 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 // *** main routes *** //
 app.use('/', routes);
-app.use('/api', animals);
+app.use('/api/', animals);
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Not Found,hey johnny');
   err.status = 404;
   next(err);
 });
