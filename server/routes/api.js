@@ -6,7 +6,7 @@ var Animal = require('../models/animals');
 
 // GET ALL animals
 router.get('/animals', function(req, res, next) {
-  Animal.find(function(err,date){
+  Animal.find(function(err,data){
     if(err){
       res.json({'message':err,});
       } else {
@@ -32,13 +32,30 @@ router.post('/animals', function(req, res, next) {
 });
 
 // PUT SINGLE ANIMAL
-router.get('/animals', function(req, res, next) {
-  res.send('hello!');
+router.put('/animal/:id', function(req, res, next) {
+  Animal.findByIdAndUpdate(req.params.id, req.body, function(err,data){
+    if(err){
+      res.json({
+        'message':err
+      });
+    } else{
+      res.json(data);
+    }
+  });
 });
 
 // DELETE SINGLE ANIMAL
-router.get('/animals', function(req, res, next) {
-  res.send('hello!');
+router.delete('/animal/:id', function(req, res, next) {
+  Animal.findByIdAndRemove(req.params.id,function(err,data){
+      if(err){
+        res.json({
+          'message':err
+        });
+      } else {
+        res.json(data);
+      }
+
+  });
 });
 
 
